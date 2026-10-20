@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 
 import pandas as pd
+import streamlit as st
 import streamlit.components.v1 as components
 
 from engine import POLICY, Result
@@ -237,4 +238,7 @@ def live_dashboard(df: pd.DataFrame, res: Result, algo: str, quantum: int, show_
             "procs": procs, "run": run, "cuts": cuts, "palette": PALETTE, "showPri": show_pri}
     html = TEMPLATE.replace("__DATA__", json.dumps(data))
     height = 130 + 58 * len(procs) + 150 + 330
-    components.html(html, height=height, scrolling=True)
+    if hasattr(st, "iframe"):          # modern Streamlit
+        st.iframe(html, height=height)
+    else:                              # older Streamlit fallback
+        components.html(html, height=height, scrolling=True)
