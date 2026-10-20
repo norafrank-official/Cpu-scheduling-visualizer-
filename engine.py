@@ -435,4 +435,3 @@ def rr_lab(df, cmap):
                                      yaxis2=dict(title="switches", overlaying="y", side="right", showgrid=False))
     st.plotly_chart(sf, width="stretch", key="lab_sweep")
     st.caption("Small quanta → fast response but many switches. Large quanta → few switches, Round Robin drifts toward FCFS.")
-
